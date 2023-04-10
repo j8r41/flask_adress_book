@@ -1,0 +1,2 @@
+FLASK_APP=adress_book.py
+FLASK_DEBUG=true
