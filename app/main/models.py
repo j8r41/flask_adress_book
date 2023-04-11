@@ -1,13 +1,14 @@
 from app import db
 
+
 adressobject_resident = db.Table(
     "adressobject_resident",
-    db.Column("adressobject_id", db.Integer, db.ForeignKey("adressobject.id")),
+    db.Column("adressobject_id", db.Integer, db.ForeignKey("adress.id")),
     db.Column("resident_id", db.Integer, db.ForeignKey("resident.id")),
 )
 
 
-class AdressObject(db.Model):
+class Adress(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     country = db.Column(db.String(64), nullable=False)
     subject = db.Column(db.String(64), nullable=False)
@@ -28,8 +29,3 @@ class Resident(db.Model):
     second_name = db.Column(db.String(64), nullable=False)
     first_name = db.Column(db.String(64), nullable=False)
     middle_name = db.Column(db.String(64), nullable=True)
-    addresses = db.relationship(
-        "AdressObject",
-        secondary=adressobject_resident,
-        backref=db.backref("residents", lazy="dynamic"),
-    )
