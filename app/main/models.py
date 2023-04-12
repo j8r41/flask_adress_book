@@ -29,3 +29,6 @@ class Resident(db.Model):
     second_name = db.Column(db.String(64), nullable=False)
     first_name = db.Column(db.String(64), nullable=False)
     middle_name = db.Column(db.String(64), nullable=True)
+
+    def __repr__(self) -> str:
+        return f"{self.second_name} {self.first_name} {self.middle_name}"

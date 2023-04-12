@@ -1,6 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
+    {# Table #}
     <div class="container">
-        {% for i in data %}{{i}}{% endfor %}
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Страна</th>
+                    <th scope="col">Субъект</th>
+                    <th scope="col">Город</th>
+                    <th scope="col">Индекс</th>
+                    <th scope="col">Улица</th>
+                    <th scope="col">№ здания</th>
+                    <th scope="col">№ квартиры</th>
+                    <th scope="col">Житель</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in data %}
+                    <tr>
+                        <td>{{ obj.country }}</td>
+                        <td>{{ obj.subject }}</td>
+                        <td>{{ obj.city }}</td>
+                        <td>{{ obj.index }}</td>
+                        <td>{{ obj.street }}</td>
+                        <td>{{ obj.number_building }}</td>
+                        <td>{{ obj.number_flat }}</td>
+                        <td>{{ obj.residents }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
