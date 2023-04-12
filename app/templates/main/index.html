@@ -1,2 +1,6 @@
 {% extends 'base.html' %}
-{% block content %}<h1>Hi!</h1>{% endblock %}
+{% block content %}
+    <div class="container">
+        {% for i in data %}{{i}}{% endfor %}
+    </div>
+{% endblock %}

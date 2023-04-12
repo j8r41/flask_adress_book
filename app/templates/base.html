@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+              href="{{ url_for("static", filename="bootstrap/css/bootstrap.min.css") }}">
+        <script scr="{{ url_for("static", filename="bootstrap/js/bootstrap.min.js") }}"></script>
         <title>
             {% block title %}
                 {% if title %}
@@ -14,7 +17,15 @@
             {% endblock %}
         </title>
     </head>
-    <body>
-        {% block content %}{% endblock %}
-    </body>
+    <main>
+        <nav>
+            {% include "includes/nav.html" %}
+        </nav>
+        <body>
+            {% block content %}Block 'content'{% endblock %}
+        </body>
+        <footer>
+            {% include "includes/footer.html" %}
+        </footer>
+    </main>
 </html>
