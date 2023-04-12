@@ -8,8 +8,8 @@ from config import Config
 
 db = SQLAlchemy()
 migrate = Migrate()
-login = LoginManager()
-login.login_view = "auth.login"
+# login = LoginManager()
+# login.login_view = "auth.login"
 
 
 def create_app(config_class=Config):

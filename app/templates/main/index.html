@@ -25,10 +25,56 @@
                         <td>{{ obj.street }}</td>
                         <td>{{ obj.number_building }}</td>
                         <td>{{ obj.number_flat }}</td>
-                        <td>{{ obj.residents }}</td>
+                        <td>
+                            {% for obj in obj.residents %}{{ obj }}{% endfor %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+    {# Pagination #}
+    {% if data.pages > 1 %}
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% if data.has_prev %}
+                    <li class="page-item">
+                        <a href="{{ url_for('main.index', page=data.prev_num) }}"
+                           class="page-link">&laquo;</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;</span>
+                    </li>
+                {% endif %}
+                {% for num in pages %}
+                    {% if num %}
+                        {% if data.page == num %}
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">{{ num }} <span class="sr-only">(current)</span></span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a href="{{ url_for('main.index', page=num) }}" class="page-link">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% elif num is none %}
+                        <li class="page-item disabled">
+                            <span class="page-link dots">...</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if data.has_next %}
+                    <li class="page-item">
+                        <a href="{{ url_for('main.index', page=data.next_num) }}"
+                           class="page-link">&raquo;</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&raquo;</span>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
 {% endblock %}
