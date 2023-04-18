@@ -2,6 +2,21 @@
 {% block content %}
     <div class="container">
         <h1 class="text-center">Вход в учетную запись</h1>
+        <!-- Flash-message -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-dismissible fade show {% if category == 'error' %}alert-danger{% elif category == 'warning' %}alert-warning{% else %}alert-success{% endif %}"
+                         role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <!-- Form -->
         <form action="" method="post">
             {{ form.hidden_tag() }}
             <p>
@@ -16,6 +31,9 @@
             </p>
             <p>{{ form.remember_me() }} {{ form.remember_me.label(class="form-label") }}</p>
             <p>{{ form.submit(class="btn btn-success") }}</p>
+            <p>
+                Нет учетной записи? <a href="{{ url_for("auth.register") }}">Регистрация</a>.
+            </p>
         </form>
     </div>
 {% endblock content %}
