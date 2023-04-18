@@ -1,15 +1,18 @@
 from flask import Flask
+from flask_babel import Babel
+from flask_babel import lazy_gettext as _l
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
 
-
 db = SQLAlchemy()
 migrate = Migrate()
-# login = LoginManager()
-# login.login_view = "auth.login"
+login = LoginManager()
+login.login_view = "auth.login"
+login.login_message = _l("Пожалуйста, авторизуйтесь, чтобы увидеть эту страницу.")
+babel = Babel()
 
 
 def create_app(config_class=Config):
@@ -18,10 +21,15 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     migrate.init_app(app, db)
-    # login.init_app(app)
+    login.init_app(app)
+    babel.init_app(app)
 
     from app.main import bp as main_bp
 
     app.register_blueprint(main_bp)
+
+    from app.auth import bp as auth_bp
+
+    app.register_blueprint(auth_bp, url_prefix="/auth")
 
     return app
