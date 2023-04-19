@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">Добавить адрес</h1>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.second_name.label(class="form-label") }}
+                <br>
+                {{ form.second_name(size=32, class="form-control") }}
+            </p>
+            <p>
+                {{ form.first_name.label(class="form-label") }}
+                <br>
+                {{ form.first_name(size=32, class="form-control") }}
+            </p>
+            <p>
+                {{ form.middle_name.label(class="form-label") }}
+                <br>
+                {{ form.middle_name(size=32, class="form-control") }}
+            </p>
+            <p>{{ form.submit(class="btn btn-success") }}</p>
+        </form>
+    </div>
+{% endblock content %}

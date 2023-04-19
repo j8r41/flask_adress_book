@@ -8,7 +8,7 @@ from wtforms.validators import DataRequired
 from app.main.models import Resident
 
 
-class CreateAdressForm(FlaskForm):
+class AdressForm(FlaskForm):
     country = StringField(_l("Страна"), validators=[DataRequired()])
     subject = StringField(_l("Регион"), validators=[DataRequired()])
     city = StringField(_l("Город"), validators=[DataRequired()])
@@ -19,5 +19,12 @@ class CreateAdressForm(FlaskForm):
     residents = QuerySelectMultipleField(
         "Житель", query_factory=lambda: Resident.query
     )
-    submit = SubmitField(_l("Cоздать"))
+    submit = SubmitField(_l("Отправить"))
+
+
+class ResidentForm(FlaskForm):
+    second_name = StringField(_l("Фамилия"), validators=[DataRequired()])
+    first_name = StringField(_l("Имя"), validators=[DataRequired()])
+    middle_name = StringField(_l("Отчество"))
+    submit = SubmitField(_l("Отправить"))
     
