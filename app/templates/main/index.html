@@ -26,7 +26,7 @@
                         <td>{{ obj.number_building }}</td>
                         <td>{{ obj.number_flat }}</td>
                         <td>
-                            {% for obj in obj.residents %}{{ obj }}{% endfor %}
+                            {% for resident in obj.residents %}{{ resident }}</br>{% endfor %}
                         </td>
                     </tr>
                 {% endfor %}
