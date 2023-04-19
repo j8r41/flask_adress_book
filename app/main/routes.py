@@ -17,9 +17,10 @@ def index():
     page = request.args.get("page", 1, type=int)
     per_page = 20
     q = request.args.get("search", "")
-    data = (
-        Adress.query.join(Resident, Resident.id == Adress.id)
-        .filter(
+    data = Adress.query.join(Resident, Resident.id == Adress.id)
+
+    if q:
+        data = data.filter(
             or_(
                 Adress.country.like(f"%{q}%"),
                 Adress.subject.like(f"%{q}%"),
@@ -28,13 +29,19 @@ def index():
                 Adress.street.like(f"%{q}%"),
                 Adress.number_building.like(f"%{q}%"),
                 Adress.number_flat.like(f"%{q}%"),
-                Resident.second_name.like(f"%{q}%"),
+                Resident.second_name.like(f"%{q}%"),    
                 Resident.first_name.like(f"%{q}%"),
                 Resident.middle_name.like(f"%{q}%"),
             )
         )
-        .paginate(page=page, per_page=per_page, error_out=False)
-    )
+
+    data = data.paginate(page=page, per_page=per_page, error_out=False)
+
+    if data.total == 0:
+        return render_template(
+            "main/index.html", title="index", data=data, pages=None
+        )
+
     pages = data.iter_pages(
         left_edge=2, left_current=2, right_current=5, right_edge=2
     )
