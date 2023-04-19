@@ -46,5 +46,9 @@
             </p>
             <p>{{ form.submit(class="btn btn-success") }}</p>
         </form>
+        <form action="post">
+            <a href="{{ url_for("main.delete_id", address_id=address_id)}}" class="btn btn-danger">Удалить
+            </a>
+        </form>
     </div>
 {% endblock content %}

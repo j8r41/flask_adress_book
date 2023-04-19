@@ -122,7 +122,7 @@ def edit():
 @bp.route("/edit/<int:address_id>", methods=["GET", "POST"])
 def edit_id(address_id):
     form = AdressForm(obj=Adress.query.get(address_id))
-    if request.method == 'POST':
+    if request.method == "POST":
         if form.validate_on_submit():
             address = Adress(
                 country=form.country.data,
@@ -138,8 +138,19 @@ def edit_id(address_id):
             db.session.commit()
             flash(_("Успешно! Адрес изменен."))
             return redirect(url_for("main.index"))
+
     return render_template(
         "main/edit_address.html",
         title=_("Добавить адрес"),
         form=form,
+        address_id=address_id,
     )
+
+
+@bp.route("/delete/<int:address_id>", methods=["GET", "POST"])
+def delete_id(address_id):
+    address = Adress.query.get(address_id)
+    db.session.delete(address)
+    db.session.commit()
+    flash(_("Успешно! Адрес удален."))
+    return redirect(url_for("main.index"))
