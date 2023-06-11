@@ -29,6 +29,3 @@ $ source venv/bin/activate
 ```
 $ flask run
 ```
-## Разработчики:
-
-- [j8r41](https://github.com/j8r41)
