@@ -1,3 +1,6 @@
+# The MIT License (MIT)
+# Copyright (c) 2017 Miguel Grinberg
+
 from flask_babel import _
 from flask_babel import lazy_gettext as _l
 from flask_wtf import FlaskForm

@@ -1,3 +1,6 @@
+# The MIT License (MIT)
+# Copyright (c) 2017 Miguel Grinberg
+
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
